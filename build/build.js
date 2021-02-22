@@ -1,24 +1,25 @@
 var gui = new dat.GUI();
 var params = {
-    widthHead: 200,
-    heightHead: 229,
+    nbCase: 8,
     Download_Image: function () { return save(); },
 };
-gui.add(params, "widthHead", 200, 1000, 1);
-gui.add(params, "heightHead", 229, 1000, 1);
+gui.add(params, "nbCase", 2, 20, 1);
 gui.add(params, "Download_Image");
 function draw() {
-    background('green');
-    fill('yellow');
-    rectMode(CENTER);
+    background('red');
     noStroke();
-    rect(width / 2, height - 200, 700, 300);
-    fill('red');
-    triangle((width / 2) - 350, height - 350, (height / 2), (width / 2) - 100, (width / 2) + 350, height - 350);
-    fill('darkred');
-    triangle((width / 2) + 380, height - 370, (height / 2), (width / 2) - 100, (width / 2) + 350, height - 350);
-    fill('orange');
-    quad((width / 2) + 380, height - 370, (width / 2) + 350, height - 350, (width / 2) + 350, height - 50, (width / 2) + 380, height - 70);
+    var x = 0;
+    var y = 0;
+    for (var i = 0; i < params.nbCase; i++) {
+        console.log(y);
+        for (var j = 0; j < params.nbCase; j++) {
+            (i + j) % 2 == 0 ? fill('black') : fill('white');
+            square(x, y, width / params.nbCase);
+            x += width / params.nbCase;
+        }
+        x = 0;
+        y += height / params.nbCase;
+    }
 }
 function setup() {
     p6_CreateCanvas();
